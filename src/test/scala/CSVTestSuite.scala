@@ -89,6 +89,36 @@ class CSVTestSuite extends AnyFunSpec with CancelAfterFailure {
             })
         }
 
+        it("should execute a CSV query on remote URL") {
+            val csvUrl: String =
+                "http://scleraviz.herokuapp.com/assets/data/tips.csv"
+            val query: String = s"select * from external csv ('$csvUrl')"
+
+            val parseResult: List[SqlStatement] =
+                processor.parser.parseSqlStatements(query)
+            assert(parseResult.size === 1)
+            assert(parseResult.head.isInstanceOf[SqlRelQueryStatement] === true)
+
+            val qstmt: SqlRelQueryStatement =
+                parseResult.head.asInstanceOf[SqlRelQueryStatement]
+            
+            processor.handleQueryStatement(qstmt, { ts =>
+                val cols: List[Column] = ts.columns
+                assert(cols.size === 7)
+
+                assert(cols(0) === Column("TOTAL_BILL", SqlCharVarying(None)))
+                assert(cols(1) === Column("TIP", SqlCharVarying(None)))
+                assert(cols(2) === Column("GENDER", SqlCharVarying(None)))
+                assert(cols(3) === Column("SMOKER", SqlCharVarying(None)))
+                assert(cols(4) === Column("DAY", SqlCharVarying(None)))
+                assert(cols(5) === Column("TIME", SqlCharVarying(None)))
+                assert(cols(6) === Column("SIZE", SqlCharVarying(None)))
+
+                val rows: List[TableRow] = ts.rows.toList
+                assert(rows.size === 244)
+            })
+        }
+
         it("should teardown") {
             Option(processor).foreach(_.close())
         }
