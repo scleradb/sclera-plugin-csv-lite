@@ -17,6 +17,8 @@
 
 package com.example.csv
 
+import java.net.URL
+
 import com.scleradb.sql.expr.{ScalValueBase, CharConst}
 import com.scleradb.external.service.ExternalSourceService
 
@@ -29,8 +31,8 @@ class CSVSourceService extends ExternalSourceService {
       * @param params Generic parameters
       */
     override def createSource(params: List[ScalValueBase]): CSVSource = {
-        val url: String = params.lift(0) match {
-            case Some(CharConst(s)) if( s != "" ) => s
+        val url: URL = params.lift(0) match {
+            case Some(CharConst(urlStr)) if( urlStr != "" ) => new URL(urlStr)
             case Some(v) =>
                 throw new IllegalArgumentException(
                     "Illegal file name/URL specified for \"" + id +

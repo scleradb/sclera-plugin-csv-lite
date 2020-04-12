@@ -32,12 +32,12 @@ import com.scleradb.sql.result.{TableResult, ScalTableRow}
 /** Wrapper over the Apache Commons CSV parser object.
   * Generates a table containing the contents of a CSV file.
   *
-  * @param url CSV URL or file name or enclosing directory
+  * @param url URL of CSV file
   */
-class CSVResult(url: String) extends TableResult {
+class CSVResult(url: URL) extends TableResult {
     /** CSV Parser */
     private val parser: CSVParser = CSVParser.parse(
-        new URL(url), Charset.defaultCharset(), CSVFormat.DEFAULT.withHeader()
+        url, Charset.defaultCharset(), CSVFormat.DEFAULT.withHeader()
     )
 
     /** Columns of the result (virtual table)

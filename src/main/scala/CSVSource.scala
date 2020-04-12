@@ -17,17 +17,19 @@
 
 package com.example.csv
 
+import java.net.URL
+
 import com.scleradb.sql.datatypes.Column
 import com.scleradb.external.objects.ExternalSource
 
 /** CSV data source
   *
   * @param name Identifier of the data service - used in explain
-  * @param url CSV URL or file name or enclosing directory
+  * @param url URL of CSV file
   */
 class CSVSource(
     override val name: String,
-    url: String
+    url: URL
 ) extends ExternalSource {
     /** CSVResult object to generate the result */
     override val result: CSVResult = new CSVResult(url)
