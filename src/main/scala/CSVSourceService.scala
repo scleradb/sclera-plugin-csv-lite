@@ -23,7 +23,7 @@ import com.scleradb.external.service.ExternalSourceService
 /** CSV data source service */
 class CSVSourceService extends ExternalSourceService {
     /** Identifier for the service */
-    override val id: String = "CSV"
+    override val id: String = "CSVLITE"
 
     /** Creates a CSVSource object given the generic parameters
       * @param params Generic parameters

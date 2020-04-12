@@ -58,7 +58,7 @@ class CSVTestSuite extends AnyFunSpec with CancelAfterFailure {
 
         it("should execute a CSV query") {
             val query: String =
-                s"select * from external csv ('${csvFile.toURI.toURL}')"
+                s"select * from external csvlite('${csvFile.toURI.toURL}')"
 
             val parseResult: List[SqlStatement] =
                 processor.parser.parseSqlStatements(query)
@@ -92,7 +92,7 @@ class CSVTestSuite extends AnyFunSpec with CancelAfterFailure {
         it("should execute a CSV query on remote URL") {
             val csvUrl: String =
                 "http://scleraviz.herokuapp.com/assets/data/tips.csv"
-            val query: String = s"select * from external csv ('$csvUrl')"
+            val query: String = s"select * from external csvlite('$csvUrl')"
 
             val parseResult: List[SqlStatement] =
                 processor.parser.parseSqlStatements(query)
