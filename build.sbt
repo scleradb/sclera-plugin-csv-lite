@@ -8,13 +8,11 @@ scalaVersion := "2.13.1"
 
 licenses := Seq("Apache License version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
 
-resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-
 libraryDependencies ++= Seq(
     "org.apache.commons" % "commons-csv" % "1.8",
-    "com.scleradb" %% "sclera-tools" % "4.0-SNAPSHOT" % "provided",
-    "com.scleradb" %% "sclera-core" % "4.0-SNAPSHOT" % "provided",
-    "com.scleradb" %% "sclera-config" % "4.0-SNAPSHOT" % "test",
+    "com.scleradb" %% "sclera-tools" % "4.0" % "provided",
+    "com.scleradb" %% "sclera-core" % "4.0" % "provided",
+    "com.scleradb" %% "sclera-config" % "4.0" % "test",
     "org.scalatest" %% "scalatest" % "3.1.1" % "test"
 )
 
